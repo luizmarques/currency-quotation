@@ -31,7 +31,15 @@ function Login() {
     }),
     onSubmit: async (values, { setErrors }) => {
       const response = await loginUser(values);
+
+      //necessario refatoração utilizando redux para manter o usuário cadastrado
+      const userEmail = "luiz_alak@hotmail.com"
+
       saveUser(JSON.stringify(response.data))
+
+      if (response !== null) {
+        localStorage.setItem('@currency_quotation/userEmail', userEmail)
+      }
 
       history.push("/");
     },
