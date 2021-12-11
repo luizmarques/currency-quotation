@@ -64,28 +64,19 @@
 
 /* product css */
 .currency {
-  flex-direction: column;
-  justify-content: flex-end;
-  min-height: 400px;
-  min-width: 200px;
-  margin: 10px;
-  padding: 20px;
-  width: 100%;
-  background-color: white;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .currency__info{
-  height: 100px;
-  margin-bottom: 200px;
 }
 .currency__price{
-  margin-top: 5px;
+ 
 }
 .currency__rating {
-  display: flex;
+ 
 }
 
-.product > button {
+.currency > button {
   align-self: flex-end;
   max-width: 100px;
   background-color: #f0c14b;

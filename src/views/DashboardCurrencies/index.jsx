@@ -8,7 +8,7 @@ function DashboardCurrencies() {
   const [currencyHistory, setChartCurrencyHistory] = useState({})
 
   useEffect(() => {
-    getCurrencyHistory().then((result) => {
+    getCurrencyHistory("USD").then((result) => {
       setChartCurrencyHistory(result.data)
     });
   }, [])
