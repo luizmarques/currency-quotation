@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import "../../../src/assets/css/style.css"
-import Currency from "../../components/Currencies"
 import { getTopTenCurrencies } from "../../../src/services/currencyServices"
 import Grid from '@material-ui/core/Grid'
-import { Box, makeStyles, Paper } from '@material-ui/core'
+import Chart from '../../components/Chart'
+import Currencies from '../../components/Currencies'
 
 function Home() {
   const [topTenCurrency, setTopTenCurrency] = useState({})
@@ -25,44 +25,33 @@ function Home() {
     }
   }, [])
 
-  const useStyles = makeStyles((theme) => ({
-    root: {
-      display: 'flex',
-      flexWrap: 'wrap',
-      '& > *': {
-        margin: theme.spacing(1),
-        width: theme.spacing(16),
-        height: theme.spacing(16),
-      },
-    },
-  }));
-
-  const classes = useStyles();
-
   return (
-    <Box
-      sx={{
-        display: 'flex',
-        flexWrap: 'wrap',
-        '& > :not(style)': {
-          m: 1,
-          width: 128,
-          height: 128,
-        },
-      }}
-    >
-      {Object.values(topTenCurrency).map((currency, i) =>
-        <Currency
-          key={i}
-          code={currency.code}
-          codein={currency.codein}
-          hi={currency.hi}
-          low={currency.low}
-        />
-      )
-      }
-
-    </Box >
+    <div>
+      <Grid
+        container item xs={12} spacing={2}
+        direction="row"
+        justifyContent="center"
+        alignItems="center"
+      >
+        {Object.values(topTenCurrency).map((currency, i) =>
+          <Grid
+            item xs={1}
+          >
+            <Currencies
+              key={i}
+              code={currency.code}
+              codein={currency.codein}
+              hi={currency.hi}
+              low={currency.low}
+              timestamp={currency.timestamp}
+              created_at={currency.created_at}
+            />
+          </Grid>
+        )
+        }
+        <Chart />
+      </Grid>
+    </div>
   );
 }
 

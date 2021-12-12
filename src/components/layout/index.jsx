@@ -21,6 +21,7 @@ const WrapStyled = styled.div`
   ${(props) =>
     !props.$startTransparent &&
     `
+    min-height: 93vh;
     background-color: rgb(234,237,237);
   `}
 `;

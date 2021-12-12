@@ -3,9 +3,10 @@ import { useFormik } from 'formik'
 import * as yup from "yup";
 import { PageTitle } from '../../components/PageTitle'
 import { FormField } from '../../components/FormField'
-import { Container, Row, Col, Button, Form } from 'react-bootstrap'
+import { Button, Form } from 'react-bootstrap'
 import { registerUser } from "../../services/userServices"
 import { useHistory } from 'react-router'
+import Grid from '@material-ui/core/Grid'
 
 
 function Register() {
@@ -34,18 +35,8 @@ function Register() {
       agree: yup.boolean().equals([true], "É preciso aceitar os termos."),
     }),
     onSubmit: async (values, { setErrors }) => {
-      // const response = 
       await registerUser(values)
       history.push("/users/login")
-
-      // const { error, response } = await loginUser(values);
-      // if (response) {
-      //   dispatch(updateUser(response));
-      //   history.push("/novo-pedido");
-      //   return;
-      // } else {
-      //   setError("Erro ao tentar fazer o login, verique seu e-mail e/ou senha");
-      // }
     },
   })
 
@@ -57,68 +48,73 @@ function Register() {
   });
 
   return (
-    <Container>
-      <Row className="justify-content-center">
-        <Col lg={4}>
-          <PageTitle>Register</PageTitle>
-          <Form onSubmit={formik.handleSubmit}>
-            <div>
-              <FormField
-                {...getFieldProps("name")}
-                label="Name"
-                placeholder="Name"
-              />
-            </div>
-            <div>
-              <FormField
-                {...getFieldProps("email")}
-                label="E-mail"
-                placeholder="E-mail"
-              />
-            </div>
-            <div>
-              <FormField
-                {...getFieldProps("password")}
-                type="password"
-                label="Password"
-                placeholder="Informe sua senha de acesso"
-                maxLength={50}
-              />
-            </div>
-            <Form.Group>
-              <Form.Check
-                {...formik.getFieldProps("agree")}
-                type="checkbox"
-                label={
-                  <span>
-                    I read and accept the{" "}
-                    <a href="/terms-of-use.pdf" target="_blank">
-                      Terms of use
-                    </a>
-                    .
-                  </span>
-                }
-              />
-              {formik.touched.agree && formik.errors.agree && (
-                <Form.Control.Feedback type="invalid" className="d-block">
-                  {formik.errors.agree}
-                </Form.Control.Feedback>
-              )}
-            </Form.Group>
-            <div>
-              <Button
-                variant="primary"
-                type="submit"
-                loading={formik.isValidating || formik.isSubmitting || false}
-                disabled={!formik.isValid || formik.isSubmitting || false}
-              >
-                Criar
-              </Button>
-            </div>
-          </Form >
-        </Col>
-      </Row>
-    </Container>
+    <Grid
+      container item xs={12} spacing={4}
+      direction="row"
+      justifyContent="center"
+      alignItems="center"
+    >
+      <Grid
+        item xs={3}
+      >
+        <PageTitle>Register</PageTitle>
+        <Form onSubmit={formik.handleSubmit}>
+          <div>
+            <FormField
+              {...getFieldProps("name")}
+              label="Name"
+              placeholder="Name"
+            />
+          </div>
+          <div>
+            <FormField
+              {...getFieldProps("email")}
+              label="E-mail"
+              placeholder="E-mail"
+            />
+          </div>
+          <div>
+            <FormField
+              {...getFieldProps("password")}
+              type="password"
+              label="Password"
+              placeholder="Informe sua senha de acesso"
+              maxLength={50}
+            />
+          </div>
+          <Form.Group>
+            <Form.Check
+              {...formik.getFieldProps("agree")}
+              type="checkbox"
+              label={
+                <span>
+                  I read and accept the{" "}
+                  <a href="/terms-of-use.pdf" target="_blank">
+                    Terms of use
+                  </a>
+                  .
+                </span>
+              }
+            />
+            {formik.touched.agree && formik.errors.agree && (
+              <Form.Control.Feedback type="invalid" className="d-block">
+                {formik.errors.agree}
+              </Form.Control.Feedback>
+            )}
+          </Form.Group>
+          <div>
+            <Button
+              variant="primary"
+              type="submit"
+              loading={formik.isValidating || formik.isSubmitting || false}
+              disabled={!formik.isValid || formik.isSubmitting || false}
+            >
+              Criar
+            </Button>
+          </div>
+        </Form >
+      </Grid>
+    </Grid>
   )
 }
 

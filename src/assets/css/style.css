@@ -1,6 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Readex+Pro:wght@200;300;400;500;600;700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 *{
   margin:0;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Roboto";
 }
 
 .header {
@@ -60,26 +61,87 @@
   z-index: 1;
   margin-left: 5px;
   margin-right: 5px;
+  min-height: 100vh;
 }
 
-/* product css */
+/* currency css */
+.container{
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh!important;
+  background-color: blue !important;
+}
+.paper{
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(128, 128, 128, 0.472) !important;
+  border: 1px solid white;
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
 .currency {
+  display: flex;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.currency__info{
+.code {
+  border-radius: 2px !important;
+  display: flex;
+  justify-content: center;
+  background-color:rgba(128, 128, 128, 0.877) !important;
 }
-.currency__price{
- 
-}
-.currency__rating {
- 
+.time {
+  display: flex;
+  align-self: center;
+  margin: 5px 5px;
+  padding: 5px;
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
 }
 
-.currency > button {
-  align-self: flex-end;
-  max-width: 100px;
-  background-color: #f0c14b;
-  border: 1px solid;
-  border-color: #daaf42 #ecbf4c #f3c040
+.code > p {
+  margin: 5px 5px;
+  padding: 5px;
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.price{
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  margin: 5px 5px;
+}
+.price__hi{
+  display: flex;
+  align-self: center;
+  margin: 5px 5px;
+  padding: 5px;
+  color: green;
+  font-size: 14px;
+  font-weight: bold;
+}
+.price__low{
+  margin: 5px 5px;
+  padding: 5px;
+  color: red;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.button__container{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.button__container a{
+  text-decoration: none !important;
+
+}
+
+.star {
+  color: white; 
 }

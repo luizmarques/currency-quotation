@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react'
 import { getCurrencyHistory } from "../../../src/services/currencyServices"
 import Chart from "../../components/Chart"
 import "../../../src/assets/css/style.css"
-
+import { Grid } from '@material-ui/core'
+import Currencies from '../../components/Currencies'
 
 function DashboardCurrencies() {
   const [currencyHistory, setChartCurrencyHistory] = useState({})
@@ -12,13 +13,20 @@ function DashboardCurrencies() {
       setChartCurrencyHistory(result.data)
     });
   }, [])
-  
 
   return (
-    <div className="home">
-      <div className="home__row">
-        {Object.values(currencyHistory).map((currencyHistory, i) =>
-          <Chart key={i}
+    <Grid
+      container item xs={12} spacing={2}
+      direction="row"
+      justifyContent="center"
+    >
+      {Object.values(currencyHistory).map((currencyHistory, i) =>
+        <Grid
+          item xs={2}
+        >
+          <Currencies
+            key={i}
+          >
             code={currencyHistory.code}
             codein={currencyHistory.codein}
             name={currencyHistory.name}
@@ -26,11 +34,13 @@ function DashboardCurrencies() {
             low={currencyHistory.low}
             timestamp={currencyHistory.timestamp}
             created_at={currencyHistory.created_at}
-          >
-          </Chart>
-        )}
-      </div>
-    </div>
+          </Currencies>
+        </Grid>
+
+      )}
+      <Chart className="chart" />
+    </Grid>
+
   )
 }
 
