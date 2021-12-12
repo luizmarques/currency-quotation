@@ -5,7 +5,8 @@ import "../../../src/assets/css/style.css"
 import { Grid } from '@material-ui/core'
 import Currencies from '../../components/Currencies'
 
-function DashboardCurrencies() {
+function DashboardCurrencies(props) {
+  console.log("FFFFFFFFFFFFFFFFFFFF", props)
   const [currencyHistory, setChartCurrencyHistory] = useState({})
 
   useEffect(() => {
@@ -20,24 +21,22 @@ function DashboardCurrencies() {
       direction="row"
       justifyContent="center"
     >
-      {Object.values(currencyHistory).map((currencyHistory, i) =>
+      
         <Grid
           item xs={2}
         >
-          <Currencies
-            key={i}
-          >
+          <Currencies>
             code={currencyHistory.code}
             codein={currencyHistory.codein}
             name={currencyHistory.name}
-            hi={currencyHistory.hi}
+            high={currencyHistory.high}
             low={currencyHistory.low}
             timestamp={currencyHistory.timestamp}
             created_at={currencyHistory.created_at}
           </Currencies>
         </Grid>
 
-      )}
+      )
       <Chart className="chart" />
     </Grid>
 
