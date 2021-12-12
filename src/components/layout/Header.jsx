@@ -25,12 +25,6 @@ function Header() {
             <span className="header__optionLineTwo">Register</span>
           </div>
         </Link>
-        <Link to="/currencies" className="header__link">
-          <div className="header__option">
-            <span className="header__optionLineOne">Dashboard</span>
-            <span className="header__optionLineTwo">History</span>
-          </div>
-        </Link>
       </div>
     </nav>
   )

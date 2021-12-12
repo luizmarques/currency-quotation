@@ -62,7 +62,7 @@ export const data = {
 
 function Chart({ id, code, codein, name, hi, low, timestamp, created_at }) {
   return (
-    <Grid container item xs={8} spacing={8}>
+    <Grid  className="chart" container item xs={8} spacing={8}>
       <Line options={options} data={data} />
       <div className="currency">
         <div className="currency__info">

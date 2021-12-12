@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import "../../../src/assets/css/style.css"
-import { getTopTenCurrencies } from "../../../src/services/currencyServices"
+import { getCurrencyHistory, getTopTenCurrencies } from "../../../src/services/currencyServices"
 import Grid from '@material-ui/core/Grid'
 import Chart from '../../components/Chart'
 import Currencies from '../../components/Currencies'
@@ -25,6 +25,15 @@ function Home() {
     }
   }, [])
 
+  const [currencyHistory, setChartCurrencyHistory] = useState({})
+
+  // useEffect(() => {
+  //   getCurrencyHistory("USD").then((result) => {
+  //     setChartCurrencyHistory(result.data)
+  //   });
+  // }, [])
+
+
   return (
     <div>
       <Grid
@@ -35,13 +44,17 @@ function Home() {
       >
         {Object.values(topTenCurrency).map((currency, i) =>
           <Grid
-            item xs={1}
+            item xs={5}
+            item sm={3}
+            item md={2}
+            item lg={2}
+            item xl={1}
           >
             <Currencies
               key={i}
               code={currency.code}
               codein={currency.codein}
-              hi={currency.hi}
+              high={currency.high}
               low={currency.low}
               timestamp={currency.timestamp}
               created_at={currency.created_at}
