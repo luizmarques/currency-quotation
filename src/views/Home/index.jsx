@@ -27,11 +27,10 @@ function Home() {
 
   const [currencyHistory, setChartCurrencyHistory] = useState({})
 
-  // useEffect(() => {
-  //   getCurrencyHistory("USD").then((result) => {
-  //     setChartCurrencyHistory(result.data)
-  //   });
-  // }, [])
+  getCurrencyHistory(currencyHistory.code || "USD").then((result) => {
+    setChartCurrencyHistory(result.data)
+  });
+
 
 
   return (
