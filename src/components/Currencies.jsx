@@ -20,7 +20,7 @@ function Currencies({ id, code, codein, name, high, low, timestamp, created_at }
         </Button>
       </div>
       <div className="price">
-        <p className="price__hi">R$ {high}</p>
+        <p className="price__high">R$ {high}</p>
         <p className="price__low">R$ {low}</p>
       </div>
 
