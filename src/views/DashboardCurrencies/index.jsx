@@ -35,8 +35,6 @@ function DashboardCurrencies(props) {
           item xl={1}
 
           >
-            {console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@", currencyHistory)}
-
             <Currencies>
               code={currencyHistory.code}
               codein={currencyHistory.codein}

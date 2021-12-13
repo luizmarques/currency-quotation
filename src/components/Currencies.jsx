@@ -3,11 +3,8 @@ import "../assets/css/style.css"
 import { Button, Paper } from '@material-ui/core'
 import StarRateIcon from '@material-ui/icons/StarRate'
 
-function Currencies({ id, code, codein, name, high, low, timestamp, created_at }) {
-  const handleClick = () => {
-    //chamar a função para atualizar usuario com moeda favorita
+function Currencies({ id, code, codein, name, high, low, timestamp, create_date, handleClickStar, handleClickCurrency }) {
 
-  }
   return (
     <Paper
       elevation={5}
@@ -15,8 +12,8 @@ function Currencies({ id, code, codein, name, high, low, timestamp, created_at }
     >
       <div className="code">
         <p>{code}</p>
-        <Button onClick={handleClick}>
-          <StarRateIcon className="star" />
+        <Button>
+          <StarRateIcon className="star" onClick={handleClickStar} />
         </Button>
       </div>
       <div className="price">
@@ -26,13 +23,12 @@ function Currencies({ id, code, codein, name, high, low, timestamp, created_at }
 
       <div className="button__container">
         <div>
-
-          <Button className="button" variant="contained" color="primary" to="/currencies">Details</Button>
+          <Button className="button" variant="contained" color="primary" onClick={handleClickCurrency} > Chart</Button>
         </div>
         <div >
-
         </div>
       </div>
+      <p className="create">{create_date}</p>
     </Paper>
   )
 }

@@ -7,11 +7,13 @@ import { Button, Form } from 'react-bootstrap'
 import { useFormik } from 'formik'
 import * as yup from "yup";
 import { loginUser } from "../../services/userServices"
-import { saveUser } from '../../config/storage'
 import Grid from '@material-ui/core/Grid'
+import {useDispatch} from 'react-redux'
+import { updateUser } from '../../store/slices/userSlice'
 
 
 function Login() {
+  const dispatch = useDispatch()
   const history = useHistory()
 
   const formik = useFormik({
@@ -31,18 +33,25 @@ function Login() {
         .max(50, "Enter at least 50 characters"),
     }),
     onSubmit: async (values, { setErrors }) => {
-      const response = await loginUser(values);
+      console.log(values)
+      try{
+        const response = await loginUser(values);
+        dispatch(updateUser(response.data))
+        
+        console.log(response.data)
+        const userEmail = response.data.email
 
-      //necessario refatoração utilizando redux para manter o usuário cadastrado
-      const userEmail = "luiz_alak@hotmail.com"
-
-      saveUser(JSON.stringify(response.data))
-
-      if (response !== null) {
-        localStorage.setItem('@currency_quotation/userEmail', userEmail)
+        //necessario refatoração utilizando redux para manter o usuário cadastrado
+          
+        if (response !== null) {
+          localStorage.setItem('@currency_quotation/userEmail', userEmail)
+        }
+  
+        history.push("/");
+      }catch{
+        console.log("@")
       }
 
-      history.push("/");
     },
   })
 
@@ -65,6 +74,14 @@ function Login() {
       >
         <PageTitle>Login</PageTitle>
         <Form onSubmit={formik.handleSubmit}>
+          <div>
+            <FormField
+              {...getFieldProps("name")}
+              label="Name"
+              placeholder="Name"
+            />
+
+          </div>
           <div>
             <FormField
               {...getFieldProps("email")}

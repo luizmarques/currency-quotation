@@ -5,6 +5,10 @@ export const setStorageItem = (key, value) =>
 
 export const getStorageItem = (key) => localStorage.getItem(`${keyStorage + key}`);
 
+export const getCurrencyHistory = (key) => localStorage.getItem(`${keyStorage + key}`);
+
+export const getTopTenCurrency = (key) => localStorage.getItem(`${keyStorage + key}`);
+
 export const removeStorageItem = (key) => localStorage.removeItem(`${keyStorage + key}`);
 
 export const saveUser = (user) => localStorage.setItem(keyStorage, user);
