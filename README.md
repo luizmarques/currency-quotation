@@ -10,8 +10,11 @@
 <p> Os requisitos funcionais para esse projeto são:
 
 · Apresentar e atualizar a cotação em tempo real de pelo menos 10 moedas em BRL
+  
 · Apresentar o histórico de cotação de pelo menos uma moeda em gráfico 
+  
 · Utilizar a API para consultar as cotações - https://docs.awesomeapi.com.br/api-de-moedas
+  
 · A aplicação deverá atender o quesito de escalabilidade</p>
 
 
