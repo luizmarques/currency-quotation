@@ -4,11 +4,14 @@ import { getCurrencyHistory, getTopTenCurrencies } from "../../../src/services/c
 import Grid from '@material-ui/core/Grid'
 import Chart from '../../components/Chart'
 import Currencies from '../../components/Currencies'
-import { updateUserFavoriteCurrency } from '../../services/userServices'
+import { useDispatch, useSelector } from 'react-redux'
+import { favoriteCurrency } from '../../store/slices/userSlice'
+
 
 
 function Home() {
   const [topTenCurrency, setTopTenCurrency] = useState({})
+  const dispatch = useDispatch()
 
   const callGetTopTenCurrencies = async () => {
     try {
@@ -18,7 +21,7 @@ function Home() {
     } catch (e) {
       console.log(e)
     }
-    setTimeout(callGetTopTenCurrencies, 10000)
+    setTimeout(callGetTopTenCurrencies, 30000)
   }
 
   useEffect(() => {
@@ -36,13 +39,16 @@ function Home() {
     });
   }
 
-  const [favoriteCurrency, setfavoriteCurrency] = useState({})
+  const user = useSelector(state => {
+    return state.user.user
+  })
+
+  const [isFavorite, setIsFavorite] = useState(false)
   const handleClickStar = (code) => {
-    updateUserFavoriteCurrency(code).then((result) => {
-      setTopTenCurrency(result.data)
-      const res = localStorage.setItem('@currency_quotation/favoriteCurrency', JSON.stringify(result.data.favoriteCurrency))
-      console.log(res)
-    });
+    dispatch(favoriteCurrency(code))
+    setIsFavorite(!isFavorite)
+
+    const res = localStorage.setItem('@currency_quotation/favoriteCurrency', JSON.stringify(code))
   }
 
   return (
@@ -53,32 +59,35 @@ function Home() {
         justifyContent="center"
         alignItems="center"
       >
-        {Object.values(topTenCurrency).map((currency, i) =>
-          <Grid
-            item xs={5}
-            item sm={3}
-            item md={2}
-            item lg={2}
-            item xl={1}
-          >
-            <Currencies
-              handleClickCurrency={() => { handleClick(currency.code) }}
-              handleClickStar={() => { handleClickStar(currency.code) }}
-              key={i}
-              code={currency.code}
-              codein={currency.codein}
-              timestamp={currency.timestamp}
-              high={currency.high}
-              low={currency.low}
-              timestamp={currency.timestamp}
-              create_date={currency.create_date}
-            />
-          </Grid>
-        )
+        {Object.values(topTenCurrency).map((currency, i) => {
+          const priceHigh = Number(currency.high).toFixed(4)
+          const priceLow = Number(currency.low).toFixed(4)
+
+          return (
+            < Grid
+              item xs={5}
+              item sm={3}
+              item md={2}
+              item lg={2}
+              item xl={1}
+            >
+              <Currencies
+                handleClickCurrency={() => { handleClick(currency.code) }}
+                handleClickStar={() => { handleClickStar(currency.code) }}
+                key={i}
+                code={currency.code}
+                codein={currency.codein}
+                high={priceHigh}
+                low={priceLow}
+                create_date={currency.create_date}
+              />
+            </Grid>
+          )
+        })
         }
         <Chart currencyHistory={currencyHistory} />
       </Grid>
-    </div>
+    </div >
   );
 }
 

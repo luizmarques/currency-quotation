@@ -25,8 +25,6 @@ ChartJS.register(
   Legend
 );
 
-
-
 function Chart(props) {
   const options = {
     responsive: true,
@@ -49,7 +47,7 @@ function Chart(props) {
       {
         label: 'High Price',
         data: props.currencyHistory.map((i) => {
-          return faker.datatype.number({ max: parseFloat(i.high) })
+          return faker.datatype.number({ max: parseFloat(i.high).toFixed(4) })
         }),
         borderColor: 'rgba(0, 128, 0, 0.5)',
         backgroundColor: 'rgba(0, 128, 0, 0.5)',
@@ -58,7 +56,7 @@ function Chart(props) {
       {
         label: 'Low Price',
         data: props.currencyHistory.map((i) => {
-          return faker.datatype.number({ max: parseFloat(i.low) })
+          return faker.datatype.number({ max: parseFloat(i.low).toFixed(4) })
         }),
         borderColor: 'rgb(255, 99, 132)',
         backgroundColor: 'rgba(255, 99, 132, 0.5)',

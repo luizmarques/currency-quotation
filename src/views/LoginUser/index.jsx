@@ -33,23 +33,19 @@ function Login() {
         .max(50, "Enter at least 50 characters"),
     }),
     onSubmit: async (values, { setErrors }) => {
-      console.log(values)
       try{
         const response = await loginUser(values);
-        dispatch(updateUser(response.data))
-        
-        console.log(response.data)
-        const userEmail = response.data.email
 
-        //necessario refatoração utilizando redux para manter o usuário cadastrado
+        const user = response.data.props
+        dispatch(updateUser(user))
           
         if (response !== null) {
-          localStorage.setItem('@currency_quotation/userEmail', userEmail)
+          localStorage.setItem('@currency_quotation/user', user)
         }
   
         history.push("/");
-      }catch{
-        console.log("@")
+      }catch(e){
+        console.log(e)
       }
 
     },
@@ -74,14 +70,6 @@ function Login() {
       >
         <PageTitle>Login</PageTitle>
         <Form onSubmit={formik.handleSubmit}>
-          <div>
-            <FormField
-              {...getFieldProps("name")}
-              label="Name"
-              placeholder="Name"
-            />
-
-          </div>
           <div>
             <FormField
               {...getFieldProps("email")}

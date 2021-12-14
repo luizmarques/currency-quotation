@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import "../assets/css/style.css"
 import { Button, Paper } from '@material-ui/core'
-import StarRateIcon from '@material-ui/icons/StarRate'
+import { StarRate } from '@material-ui/icons'
 
-function Currencies({ id, code, codein, name, high, low, timestamp, create_date, handleClickStar, handleClickCurrency }) {
 
+function Currencies({ id, code, codein, name, high, low, timestamp, create_date,notFavorite, isFavorite, handleClickStar, handleClickCurrency }) {
+  const [favorite, setFavorite] = useState(false)
   return (
     <Paper
       elevation={5}
@@ -12,8 +13,10 @@ function Currencies({ id, code, codein, name, high, low, timestamp, create_date,
     >
       <div className="code">
         <p>{code}</p>
-        <Button>
-          <StarRateIcon className="star" onClick={handleClickStar} />
+        <Button onClick={() => setFavorite(!favorite)}>
+          {favorite? 
+            (<StarRate style={{ color: "yellow" }} className="star" onClick={handleClickStar} />)
+            : (<StarRate style={{ color: "white" }} className="star" onClick={handleClickStar} />)}
         </Button>
       </div>
       <div className="price">

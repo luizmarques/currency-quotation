@@ -9,6 +9,7 @@ if (user?.token) {
 const initialState = {
   userLoggedIn: !!user,
   user: user ? user : {},
+  favoriteCurrency: [],
 };
 
 export const slice = createSlice({
@@ -19,8 +20,21 @@ export const slice = createSlice({
       state.userLoggedIn = true;
       state.user = action.payload;
     },
+    favoriteCurrency: (state, action) => {
+      const response = state.user.favoriteCurrency.find((item) => {
+        return item == action.payload
+      })
+      if (!response || undefined) {
+        state.user.favoriteCurrency.push(action.payload)
+      } else {
+        const favorite = state.user.favoriteCurrency.indexOf(response)
+        if (favorite > -1) {
+          state.user.favoriteCurrency.splice(favorite, 1)
+        }
+      }
+    }
   },
 });
 
-export const { updateUser } = slice.actions;
+export const { updateUser, favoriteCurrency } = slice.actions;
 export default slice.reducer;
