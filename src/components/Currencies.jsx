@@ -15,7 +15,7 @@ function Currencies({ id, code, codein, name, high, low, timestamp, create_date,
         <p>{code}</p>
         <Button onClick={() => setFavorite(!favorite)}>
           {favorite? 
-            (<StarRate style={{ color: "yellow" }} className="star" onClick={handleClickStar} />)
+            (<StarRate style={{ color: "#FFD700" }} className="star" onClick={handleClickStar} />)
             : (<StarRate style={{ color: "white" }} className="star" onClick={handleClickStar} />)}
         </Button>
       </div>
